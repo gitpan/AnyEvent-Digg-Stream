@@ -1,0 +1,28 @@
+--- #YAML:1.0
+name:               AnyEvent-Digg-Stream
+version:            0.01
+abstract:           AnyEvent client for the Digg streaming API
+author:
+    - gray <gray@cpan.org>
+license:            perl
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+build_requires:
+    Test::More:  0.82
+requires:
+    AnyEvent::HTTP:  0
+    JSON:            2.09
+    URI:             0
+resources:
+    repository:  http://github.com/gray/anyevent-digg-stream
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.56
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
+recommends:
+    JSON::XS:  2.2
