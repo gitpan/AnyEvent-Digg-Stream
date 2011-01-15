@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               AnyEvent-Digg-Stream
-version:            0.02
+version:            0.03
 abstract:           AnyEvent client for the Digg streaming API
 author:
     - gray <gray@cpan.org>
