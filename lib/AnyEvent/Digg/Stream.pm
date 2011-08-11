@@ -8,13 +8,14 @@ use Carp qw(croak);
 use JSON;
 use URI;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 $VERSION = eval $VERSION;
 
 sub new {
     my ($class, %params) = @_;
 
-    my $on_error      = $params{on_erorr}      || sub { croak @_ };
+    my $on_error      = $params{on_error}      || sub { croak @_ };
+    my $on_disconnect = $params{on_disconnect} || sub { croak 'Disconnected' };
     my $on_event      = $params{on_event}      || sub { };
     my $on_comment    = $params{on_comment}    || sub { };
     my $on_digg       = $params{on_digg}       || sub { };
@@ -62,13 +63,16 @@ sub new {
         },
         on_body => sub {
             my ($content) = @_;
-            if (my $data = $json->incr_parse($content)) {
+            if (my $data = eval { $json->incr_parse($content) }) {
                 $on_event->($data);
                 ($events{$data->{type}} || sub {})->($data);
             }
+            elsif ($@) {
+                $json->incr_skip;
+            }
             return 1;
         },
-        sub {},
+        sub { $on_disconnect->() },
     );
 
     return $conn;
@@ -132,6 +136,10 @@ Callback to executute for the related event type.
 
 Callback to execute on error.
 
+=item B<on_disconnect>
+
+Callback to execute on disconnect.
+
 =back
 
 =head1 SEE ALSO
@@ -144,8 +152,8 @@ L<http://developers.digg.com/version2/stream>
 
 Please report any bugs or feature requests to
 L<http://rt.cpan.org/Public/Bug/Report.html?Queue=AnyEvent-Digg-Stream>.
-I will be notified, and then you'll automatically be notified of progress
-on your bug as I make changes.
+I will be notified, and then you'll automatically be notified of progress on
+your bug as I make changes.
 
 =head1 SUPPORT
 

@@ -1,0 +1,51 @@
+{
+   "abstract" : "AnyEvent client for the Digg streaming API",
+   "author" : [
+      "gray <gray@cpan.org>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "ExtUtils::MakeMaker version 6.59, CPAN::Meta::Converter version 2.112150",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "AnyEvent-Digg-Stream",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0.82"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : 0
+         }
+      },
+      "runtime" : {
+         "recommends" : {
+            "JSON::XS" : "2.2"
+         },
+         "requires" : {
+            "AnyEvent::HTTP" : 0,
+            "JSON" : "2.09",
+            "URI" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "url" : "http://github.com/gray/anyevent-digg-stream"
+      }
+   },
+   "version" : "0.04"
+}
