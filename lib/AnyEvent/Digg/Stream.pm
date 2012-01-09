@@ -8,7 +8,7 @@ use Carp qw(croak);
 use JSON;
 use URI;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 $VERSION = eval $VERSION;
 
 sub new {
@@ -36,7 +36,7 @@ sub new {
     my $uri = URI->new('http://services.digg.com/2.0/stream');
     $uri->query_form(
         format => 'json',
-        3 == @events ? () : @events ? join(',', @events) : (),
+        3 == @events ? () : @events ? (types => join ',', @events) : (),
     );
 
     my $json = JSON->new->utf8;
@@ -189,7 +189,7 @@ L<http://search.cpan.org/dist/AnyEvent-Digg-Stream/>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2010-2011 gray <gray at cpan.org>, all rights reserved.
+Copyright (C) 2010-2012 gray <gray at cpan.org>, all rights reserved.
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
